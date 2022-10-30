@@ -25,6 +25,21 @@ public class Schedule {
     @Enumerated(EnumType.STRING)
     private Set<EmployeeSkill> activities;
 
+    public Schedule() {
+    }
+
+    public Schedule(long id, List<Employee> employee, List<Pet> pet, LocalDate date, Set<EmployeeSkill> activities) {
+        this.id = id;
+        this.employee = employee;
+        this.pet = pet;
+        this.date = date;
+        this.activities = activities;
+    }
+
+    public Schedule(LocalDate date) {
+        this.date = date;
+    }
+
     public long getId() {
         return id;
     }
