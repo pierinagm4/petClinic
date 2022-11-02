@@ -25,6 +25,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     private EmployeeRepo employeeRepo;
 
     @Autowired
+
     private PetRepo petRepo;
 
     @Override
@@ -56,18 +57,17 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<Schedule> getScheduleForPet(long petId) {
-        return null;
+        return scheduleRepo.findByPet(petId);
     }
 
     @Override
     public List<Schedule> getScheduleForEmployee(long employeeId) {
-        return null;
+        return scheduleRepo.findByEmployee(employeeId);
     }
 
     @Override
     public List<Schedule> getScheduleForCustomer(long customerId) {
-        return null;
+        return scheduleRepo.findByCustomer(customerId);
     }
-
 
 }

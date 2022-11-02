@@ -4,6 +4,7 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,6 +27,9 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     Set<DayOfWeek> daysAvailable;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Schedule> scheduleEmployee;
+
 
     public Employee() {
     }
@@ -43,6 +47,14 @@ public class Employee {
         this.name = name;
         this.skills = skills;
         this.daysAvailable = daysAvailable;
+    }
+
+    public Employee(long id, String name, Set<EmployeeSkill> skills, Set<DayOfWeek> daysAvailable, List<Schedule> scheduleEmployee) {
+        this.id = id;
+        this.name = name;
+        this.skills = skills;
+        this.daysAvailable = daysAvailable;
+        this.scheduleEmployee = scheduleEmployee;
     }
 
     public long getId() {
@@ -77,4 +89,11 @@ public class Employee {
         this.daysAvailable = daysAvailable;
     }
 
+    public List<Schedule> getScheduleEmployee() {
+        return scheduleEmployee;
+    }
+
+    public void setScheduleEmployee(List<Schedule> scheduleEmployee) {
+        this.scheduleEmployee = scheduleEmployee;
+    }
 }

@@ -44,17 +44,17 @@ public class ScheduleController {
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+        return convertListScheduleToListScheduleDTO(scheduleService.getScheduleForPet(petId));
     }
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        return convertListScheduleToListScheduleDTO(scheduleService.getScheduleForEmployee(employeeId));
     }
 
     @GetMapping("/customer/{customerId}")
     public List<ScheduleDTO> getScheduleForCustomer(@PathVariable long customerId) {
-        throw new UnsupportedOperationException();
+        return convertListScheduleToListScheduleDTO(scheduleService.getScheduleForCustomer(customerId));
     }
 
     private ScheduleDTO convertScheduleToScheduleDTO(Schedule schedule){
@@ -67,7 +67,7 @@ public class ScheduleController {
     }
 
     private List<ScheduleDTO> convertListScheduleToListScheduleDTO(List<Schedule> schedule) {
-        return schedule.stream()
+        return schedule.stream().distinct()
                 .map(this::convertScheduleToScheduleDTO).toList();
     }
 

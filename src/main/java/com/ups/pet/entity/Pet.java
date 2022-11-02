@@ -1,10 +1,10 @@
 package com.ups.pet.entity;
 
 import org.hibernate.annotations.Nationalized;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "pets")
@@ -22,6 +22,9 @@ public class Pet {
 
     @ManyToOne @JoinColumn(name="CUSTOMER_ID", nullable = false)
     private Customer customer;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pet", cascade = CascadeType.ALL)
+    private List<Schedule> schedulePet;
 
     private LocalDate birthDate;
 
@@ -54,6 +57,16 @@ public class Pet {
         this.id = id;
         this.type = type;
         this.name = name;
+        this.birthDate = birthDate;
+        this.notes = notes;
+    }
+
+    public Pet(long id, PetType type, String name, Customer customer, List<Schedule> schedulePet, LocalDate birthDate, String notes) {
+        this.id = id;
+        this.type = type;
+        this.name = name;
+        this.customer = customer;
+        this.schedulePet = schedulePet;
         this.birthDate = birthDate;
         this.notes = notes;
     }
@@ -104,5 +117,13 @@ public class Pet {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public List<Schedule> getSchedulePet() {
+        return schedulePet;
+    }
+
+    public void setSchedulePet(List<Schedule> schedulePet) {
+        this.schedulePet = schedulePet;
     }
 }

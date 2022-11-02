@@ -13,10 +13,10 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Employee> employee;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Pet> pet;
 
     private LocalDate date;
@@ -79,4 +79,7 @@ public class Schedule {
     public void setActivities(Set<EmployeeSkill> activities) {
         this.activities = activities;
     }
+
+
+
 }
